@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry, Your Honour 😭</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #e8d9ff);
+    overflow: hidden;
+}
+
+.card {
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    padding: 35px 25px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.emoji {
+    font-size: 55px;
+}
+
+h1 {
+    color: #333;
+    margin: 15px 0;
+}
+
+p {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+button {
+    border: none;
+    padding: 14px 25px;
+    border-radius: 30px;
+    background: #ff5c8a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+#case {
+    font-size: 13px;
+    color: #999;
+    margin-top: 20px;
+}
+
+.heart {
+    position: fixed;
+    font-size: 25px;
+    animation: float 2s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(0) scale(0.5);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-250px) rotate(20deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="emoji" id="emoji">🚨</div>
+
+    <h1 id="title">URGENT NOTICE</h1>
+
+    <p id="message">
+        A certain idiot has been reported missing from the chat...
+    </p>
+
+    <button onclick="nextStep()" id="button">
+        Investigate 👀
+    </button>
+
+    <div id="case">
+        Case #001
+    </div>
+
+</div>
+
+<script>
+
+let step = 0;
+
+const screens = [
+
+{
+emoji: "🚨",
+title: "URGENT NOTICE",
+message: "A certain idiot has been reported missing from the chat...",
+button: "Investigate 👀"
+},
+
+{
+emoji: "🎮",
+title: "CASE UPDATE",
+message: "Investigation found the suspect was busy playing a game while his very important friend was sending reels AND messages.",
+button: "Continue →"
+},
+
+{
+emoji: "⚖️",
+title: "THE VERDICT",
+message: "Charges: replying late • missing reels • making you say good night before replying.",
+button: "See the sentence 😭"
+},
+
+{
+emoji: "🥺",
+title: "Okay okay...",
+message: "I'm sorryyy 😭 I genuinely got carried away playing the game. I wasn't intentionally ignoring you. You're important to me, and I should've replied sooner.",
+button: "One last thing →"
+},
+
+{
+emoji: "❤️",
+title: "FRIENDSHIP RESTORED",
+message: "Peace? 🥺👉👈 Now send me those reels I missed. I promise I'll try not to disappear into another game 😂",
+button: "Accept apology ❤️"
+}
+
+];
+
+function nextStep() {
+
+    if (step < screens.length - 1) {
+
+        step++;
+
+        document.getElementById("emoji").innerText =
+            screens[step].emoji;
+
+        document.getElementById("title").innerText =
+            screens[step].title;
+
+        document.getElementById("message").innerText =
+            screens[step].message;
+
+        document.getElementById("button").innerText =
+            screens[step].button;
+
+        document.getElementById("case").innerText =
+            "Case #001 • " + (step + 1) + "/5";
+
+    } else {
+
+        document.getElementById("button").innerText =
+            "🥹❤️";
+
+        for (let i = 0; i < 20; i++) {
+
+            let heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerText =
+                ["❤️","💗","💕","✨"][Math.floor(Math.random()*4)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.top =
+                "70vh";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
